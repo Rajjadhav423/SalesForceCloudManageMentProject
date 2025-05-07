@@ -50,8 +50,13 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+  const isClient = typeof window !== 'undefined';
+
+  // Avoid hydration issues: conditionally apply only after mount (via useEffect or a wrapper)
+  const htmlClass = "light"; // OR read from cookies/localStorage and set this during SSR
+
   return (
-    <html lang="en">
+    <html lang="en" className={htmlClass} style={{ colorScheme: "light" }}>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <Providers>{children}</Providers>
       </body>
