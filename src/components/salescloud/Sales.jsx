@@ -1,5 +1,5 @@
 import React from 'react'
-import SalesCloudManager from './salesCloud'
+import SalesCloudManager from './SalesCloudManager'
 
 const sales = () => {
   return (

@@ -310,8 +310,8 @@ import { useRouter } from "next/navigation";
 import { Button } from "../components/ui/button";
 import ThemeToggle from "../components/ThemeToggle";
 // // import SalesCloud from "@/components/salesCloud";
-// import Sales from "../components/salescloud/Sales"
-import SalesCloudManager from '../components/salescloud/SalesCloudManager'
+import Sales from "../components/salescloud/Sales"
+// import SalesCloudManager from '../components/salescloud/SalesCloudManager'
 import ServiceCloud from "../components/servicecloud/serviceCloud";
 import MarketingCloud from "../components/marketingCloud";
 import AIQueryAssistant from "../components/aiassistantquery/AIQueryAssistant ";
@@ -347,7 +347,7 @@ const Page = () => {
   const renderCloudContent = () => {
     switch (activeCloud) {
       case "salescloud":
-        return <SalesCloudManager />;
+        return <Sales />;
       case "servicecloud":
         return <ServiceCloud />;
       case "marketingcloud":
