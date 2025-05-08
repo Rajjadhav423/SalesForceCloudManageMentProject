@@ -18,7 +18,7 @@ export async function POST(request) {
     // Confirm lead exists
     try {
       const lead = await conn.sobject('Lead').retrieve(leadId);
-      console.log('✅ Lead found:', lead.Id);
+      // console.log('✅ Lead found:', lead.Id);
     } catch (err) {
       console.error('❌ Lead not found:', err);
       return NextResponse.json(

@@ -5,7 +5,7 @@ import jsforce from 'jsforce';
 export async function POST(request) {
   try {
     const { username, password, securityToken } = await request.json();
-    console.log("check", username, password, securityToken);
+    // console.log("check", username, password, securityToken);
     if (!username || !password) {
       return NextResponse.json(
         { error: 'Username and password are required' },
@@ -23,13 +23,13 @@ export async function POST(request) {
 
     // Login to Salesforce
     const login = await conn.login(username, passwordWithToken);
-    console.log("login is ", login);
+    // console.log("login is ", login);
 
     // Get user identity
     const userInfo = await conn.identity();
     const result = await conn.query("SELECT Id, Name, Industry FROM Account LIMIT 10");
-    console.log(result);
-    console.log(userInfo);
+    // console.log(result);
+    // console.log(userInfo);
 
     // Return user info and connection details (don't return sensitive data)
     return NextResponse.json({

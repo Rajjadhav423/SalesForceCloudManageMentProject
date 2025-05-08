@@ -29,7 +29,7 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx"
-, "src/components/servicecloud/serviceCloud.jsx"  ],
+, "src/components/servicecloud/serviceCloud.jsx", "src/app/api/reports/route.jsx"  ],
   "exclude": [
     "node_modules"
   ]

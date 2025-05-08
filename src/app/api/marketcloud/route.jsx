@@ -5,7 +5,7 @@ import jsforce from 'jsforce';
 export async function POST(request) {
   try {
     const { accessToken, instanceUrl, query } = await request.json();
-    console.log("request reach here");
+    // console.log("request reach here");
     if (!accessToken || !instanceUrl || !query) {
       return NextResponse.json(
         { error: 'Missing required parameters' },
