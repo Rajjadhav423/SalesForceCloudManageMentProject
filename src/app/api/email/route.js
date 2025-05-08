@@ -81,7 +81,7 @@ export async function POST(request) {
       `;
 
       const result = await conn.query(query);
-      console.log("Fetched email templates:", result.records);
+      // console.log("Fetched email templates:", result.records);
       return NextResponse.json({
         success: true,
         totalSize: result.totalSize,

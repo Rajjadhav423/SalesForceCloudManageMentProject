@@ -289,6 +289,8 @@
 //   );
 // }
 
+
+// src\app\dashboard\page.jsx
 "use client";
 
 import { useState, useEffect } from "react";
@@ -345,6 +347,7 @@ import { Separator } from "../../components/ui/separator";
 import { Progress } from "../../components/ui/progress";
 import { useSalesforce } from "../../context/salesforcecontet";
 import ThemeToggle from "../../components/ThemeToggle";
+import Link from "next/link";
 export default function DashboardPage() {
   const { data: session, status } = useSession();
   const router = useRouter();
@@ -364,11 +367,11 @@ export default function DashboardPage() {
   const [activeTab, setActiveTab] = useState("overview");
   const [progress, setProgress] = useState(0);
 
-  useEffect(() => {
-    if (status === "unauthenticated") {
-      router.push("/");
-    }
-  }, [status, router]);
+  // useEffect(() => {
+  //   if (status === "unauthenticated") {
+  //     router.push("/");
+  //   }
+  // }, [status, router]);
 
   useEffect(() => {
     // Simulate loading progress when connecting
@@ -426,12 +429,12 @@ export default function DashboardPage() {
           <CardHeader className="relative z-10 pb-0">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
               <div>
-                <a
+                <Link
                   href="/"
                   className="text-sm text-muted-foreground hover:text-primary transition-colors"
                 >
                   ← Back to Home
-                </a>
+                </Link>
                 <CardTitle className="text-3xl font-bold tracking-tight">
                   Dashboard
                 </CardTitle>
