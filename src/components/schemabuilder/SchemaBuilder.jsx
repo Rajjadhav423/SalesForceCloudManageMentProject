@@ -113,7 +113,7 @@ const SchemaBuilder = () => {
 
         const { accessToken, instanceUrl } = JSON.parse(savedAuthData);
     
-        const res = await fetch('/api/bjectsinfo', {
+        const res = await fetch('/api/objectinfo', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ accessToken, instanceUrl }),

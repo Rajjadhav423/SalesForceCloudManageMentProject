@@ -29,6 +29,10 @@ import GeminiChatAssistant from "../components/aiassistantquery/GeminiChatAssist
 import Dashboard from "../components/default";
 import ReportsBuild from "../components/reports/ReportsBuild";
 import SchemaBuilder from '../components/schemabuilder/SchemaBuilder'
+import Health from "../components/health/Health";
+import LoginHistory from "../components/loginHistory/LoginHistory.jsx";
+import FileUploader from "../components/fileuploader/Fileuploader";
+import EmailTemplateManager from "../components/email/CreateEmailTemplate";
 const Page = () => {
   const { status } = useSession();
   const router = useRouter();
@@ -62,6 +66,10 @@ const Page = () => {
     { id: "geminiassistant", label: "Gemini Assistant", icon: <BrainCircuit size={20} /> },
     { id: "reports", label: "Reports", icon: <Proportions size={20} /> },
     { id: "schema", label: "Schema Builder", icon: <Cloud size={20} /> },
+    { id: "health", label: "Health Check", icon: <Cloud size={20} /> },
+    { id: "loginHistory", label: "Login History", icon: <Cloud size={20} /> },
+    { id: "fileuploader", label: "File Uploader", icon: <Cloud size={20} /> },
+    { id: "emailtemplate", label: "Email Template", icon: <Cloud size={20} /> },
 
   ];
 
@@ -74,6 +82,10 @@ const Page = () => {
       case "geminiassistant": return <GeminiChatAssistant />;
       case "reports": return <ReportsBuild />;
       case "schema": return <SchemaBuilder />;
+      case "health": return <Health />;
+      case "loginHistory": return <LoginHistory />;
+      case "fileuploader": return <FileUploader />;
+      case "emailtemplate": return <EmailTemplateManager />;
       default: return <Dashboard />;
     }
   };
