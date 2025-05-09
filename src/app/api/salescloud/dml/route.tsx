@@ -108,13 +108,13 @@ import jsforce from 'jsforce';
 export async function POST(request: Request) {
   try {
     const { accessToken, instanceUrl, operation, objectType, data, id } = await request.json();
-    console.log("Request payload:", { 
-      operation, 
-      objectType, 
-      id, 
-      hasToken: !!accessToken, 
-      hasInstanceUrl: !!instanceUrl 
-    });
+    // console.log("Request payload:", { 
+    //   operation, 
+    //   objectType, 
+    //   id, 
+    //   hasToken: !!accessToken, 
+    //   hasInstanceUrl: !!instanceUrl 
+    // });
     
     if (!accessToken || !instanceUrl) {
       return NextResponse.json(
@@ -181,10 +181,10 @@ export async function POST(request: Request) {
           );
         }
         
-        console.log(`Attempting to delete ${objectType} with ID: ${id}`);
+        // console.log(`Attempting to delete ${objectType} with ID: ${id}`);
         // Using del() for delete operation - this is the correct JSForce method
         result = await conn.sobject(objectType).del(id);
-        console.log("Deletion result:", result);
+        // console.log("Deletion result:", result);
         break;
         
       default:

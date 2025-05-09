@@ -4,8 +4,8 @@ import jsforce from 'jsforce';
 export async function POST(request) {
   try {
     const { accessToken, instanceUrl } = await request.json();
-    console.log("accessToken", accessToken);
-    console.log("instanceUrl", instanceUrl);
+    // console.log("accessToken", accessToken);
+    // console.log("instanceUrl", instanceUrl);
 
     if (!accessToken || !instanceUrl) {
       return NextResponse.json(
@@ -27,7 +27,7 @@ export async function POST(request) {
     });
 
     // Log and return the health data
-    console.log('Health Data:', response);
+    // console.log('Health Data:', response);
 
     return NextResponse.json({
       success: true,

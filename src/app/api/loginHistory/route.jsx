@@ -56,7 +56,7 @@ export async function POST(req) {
     `;
 
     // Execute the query
-    console.log('Executing SOQL query:', soqlQuery);
+    // console.log('Executing SOQL query:', soqlQuery);
     const result = await conn.query(soqlQuery);
 
     // Return the results
