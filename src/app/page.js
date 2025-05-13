@@ -186,7 +186,7 @@ const Page = () => {
             </div>
             {!sidebarCollapsed && (
               <h1 className="text-lg font-bold bg-gradient-to-r from-indigo-600 to-purple-700 bg-clip-text text-transparent truncate">
-                Cloud Manager
+                Force Cloud Manager
               </h1>
             )}
           </div>
