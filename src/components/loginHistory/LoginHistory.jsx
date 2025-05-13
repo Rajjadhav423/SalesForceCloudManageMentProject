@@ -584,7 +584,7 @@ const LoginHistory = () => {
       `;
 
       // Debug logging
-      console.log('Attempting to fetch login history from Salesforce...');
+      // console.log('Attempting to fetch login history from Salesforce...');
       setDebugInfo(prev => ({
         ...prev,
         instanceUrl,
@@ -668,7 +668,7 @@ const LoginHistory = () => {
 
       // Implement retry logic
       if (retryAttempt < MAX_RETRIES) {
-        console.log(`Retrying... Attempt ${retryAttempt + 1} of ${MAX_RETRIES}`);
+        // console.log(`Retrying... Attempt ${retryAttempt + 1} of ${MAX_RETRIES}`);
         setTimeout(() => {
           fetchData(retryAttempt + 1);
         }, RETRY_DELAY * (retryAttempt + 1)); // Exponential backoff

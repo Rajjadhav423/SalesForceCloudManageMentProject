@@ -781,7 +781,7 @@ const SchemaBuilder = () => {
         const data = await res.json();
         
         if (res.ok) {
-          console.log("Schema data loaded successfully");
+          // console.log("Schema data loaded successfully");
           setSchemaData(data.objects);
           processGraphData(data.objects);
         } else {
@@ -802,7 +802,7 @@ const SchemaBuilder = () => {
   const processGraphData = useCallback((objects) => {
     if (!objects || objects.length === 0) return;
     
-    console.log("Processing graph data for", objects.length, "objects");
+    // console.log("Processing graph data for", objects.length, "objects");
 
     const graphNodes = [];
     const graphEdges = [];
@@ -872,7 +872,7 @@ const SchemaBuilder = () => {
       });
     });
 
-    console.log(`Created ${graphNodes.length} nodes and ${graphEdges.length} edges`);
+    // console.log(`Created ${graphNodes.length} nodes and ${graphEdges.length} edges`);
 
     // Apply layout and set nodes/edges
     const layouted = getLayoutedElements(graphNodes, graphEdges, layoutDirection);

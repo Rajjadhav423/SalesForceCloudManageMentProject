@@ -1029,7 +1029,7 @@ const EmailTemplateManager = () => {
       });
       
       const data = await res.json();
-      console.log("API Response:", data);
+      // console.log("API Response:", data);
       
       if (res.ok && data.records) {
         // Transform the Salesforce records to match our expected format
@@ -1127,7 +1127,7 @@ const EmailTemplateManager = () => {
         method = 'PUT';
       }
 
-      console.log(`Making ${method} request to ${endpoint}`);
+      // console.log(`Making ${method} request to ${endpoint}`);
 
       const res = await fetch(endpoint, {
         method: method,
@@ -1136,7 +1136,7 @@ const EmailTemplateManager = () => {
       });
 
       const data = await res.json();
-      console.log("API response:", data);
+      // console.log("API response:", data);
 
       if (data.success) {
         // Update the templates list with the new or updated template
@@ -1193,7 +1193,7 @@ const EmailTemplateManager = () => {
       
       const {accessToken, instanceUrl} = JSON.parse(authdata);
       
-      console.log(`Deleting template with ID: ${templateId}`);
+      // console.log(`Deleting template with ID: ${templateId}`);
       
       const res = await fetch(`/api/email/${templateId}`, { 
         method: 'DELETE',
@@ -1211,7 +1211,7 @@ const EmailTemplateManager = () => {
       });
       
       const data = await res.json();
-      console.log("Delete response:", data);
+      // console.log("Delete response:", data);
       
       if (data.success) {
         setTemplates(templates.filter(t => t.id !== templateId));

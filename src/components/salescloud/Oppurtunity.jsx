@@ -2998,7 +2998,7 @@ const SalesCloudManager = () => {
     setError('');
     
     try {
-      console.log("Attempting to delete opportunity with ID:", id);
+      // console.log("Attempting to delete opportunity with ID:", id);
       
       // Use the executeDML helper with correct auth data
       await executeDML('delete', 'Opportunity', {}, id);
