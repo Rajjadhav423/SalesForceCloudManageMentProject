@@ -291,6 +291,7 @@
 
 
 // src\app\dashboard\page.jsx
+
 "use client";
 
 import { useState, useEffect } from "react";
@@ -430,7 +431,7 @@ export default function DashboardPage() {
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
               <div>
                 <Link
-                  href="/"
+                  href="/home"
                   className="text-sm text-muted-foreground hover:text-primary transition-colors"
                 >
                   ← Back to Home

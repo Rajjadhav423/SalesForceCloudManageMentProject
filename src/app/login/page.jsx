@@ -1,108 +1,236 @@
+// "use client";
+
+// import { useState } from "react";
+// import { signIn } from "next-auth/react";
+// import Link from "next/link";
+// import { Button } from "../../components/ui/button";
+// import {
+//     Card,
+//     CardContent,
+//     CardDescription,
+//     CardFooter,
+//     CardHeader,
+//     CardTitle,
+// } from "../../components/ui/card";
+// import ThemeToggle from '../../components/ThemeToggle'
+
+// export default function LoginPage() {
+//     const [loading, setLoading] = useState(false);
+
+//     const handleGoogleSignIn = async () => {
+//         setLoading(true);
+//         try {
+//             await signIn("google", { callbackUrl: "/home" });
+//         } catch (error) {
+//             console.error("Sign in error:", error);
+//         } finally {
+//             setLoading(false);
+//         }
+//     };
+
+//     return (
+//         <>
+//             <Header />
+//             <MainContent loading={loading} onGoogleSignIn={handleGoogleSignIn} />
+//         </>
+//     );
+// }
+
+// function Header() {
+//     return (
+//         <div className="fixed top-4 right-4 z-50">
+//             <ThemeToggle />
+//         </div>
+//     );
+// }
+
+// function MainContent({ loading, onGoogleSignIn }) {
+//     return (
+//         <div className="flex min-h-screen flex-col items-center justify-center p-4 bg-background transition-colors">
+//             <div className="w-full max-w-md">
+//                 <LoginCard loading={loading} onGoogleSignIn={onGoogleSignIn} />
+//                 <Footer />
+//             </div>
+//         </div>
+//     );
+// }
+
+// function LoginCard({ loading, onGoogleSignIn }) {
+//     return (
+//         <Card className="border-2">
+//             <CardHeader className="space-y-1">
+//                 <CardTitle className="text-2xl text-center">Sign in</CardTitle>
+//                 <CardDescription className="text-center">
+//                     Enter your credentials to access your account
+//                 </CardDescription>
+//             </CardHeader>
+//             <CardContent className="space-y-4">
+//                 <Button
+//                     variant="outline"
+//                     onClick={onGoogleSignIn}
+//                     disabled={loading}
+//                     className="w-full"
+//                 >
+//                     <GoogleIcon />
+//                     Sign in with Google
+//                 </Button>
+//             </CardContent>
+//             <CardFooter className="flex flex-col space-y-4 pt-0">
+//                 <div className="text-center text-sm">
+//                     Don&apos;t have an account?{" "}
+//                     <Link href="/register" className="text-primary hover:underline">
+//                         Create an account
+//                     </Link>
+//                 </div>
+//             </CardFooter>
+//         </Card>
+//     );
+// }
+
+// function Footer() {
+//     return (
+//         <div className="mt-8 text-center text-sm text-muted-foreground">
+//             <p>Cloud Manager &copy; {new Date().getFullYear()}</p>
+//         </div>
+//     );
+// }
+
+// function GoogleIcon() {
+//     return (
+//         <svg className="h-5 w-5 mr-2" viewBox="0 0 24 24">
+//             <path
+//                 d="M12.545,10.239v3.821h5.445c-0.712,2.315-2.647,3.972-5.445,3.972c-3.332,0-6.033-2.701-6.033-6.032s2.701-6.032,6.033-6.032c1.498,0,2.866,0.549,3.921,1.453l2.814-2.814C17.503,2.988,15.139,2,12.545,2C7.021,2,2.543,6.477,2.543,12s4.478,10,10.002,10c8.396,0,10.249-7.85,9.426-11.748L12.545,10.239z"
+//                 fill="currentColor"
+//             />
+//         </svg>
+//     );
+// }
+
 "use client";
 
 import { useState } from "react";
 import { signIn } from "next-auth/react";
+import { useRouter } from 'next/navigation';
 import Link from "next/link";
-import { Button } from "../../components/ui/button";
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardFooter,
-    CardHeader,
-    CardTitle,
-} from "../../components/ui/card";
-import ThemeToggle from '../../components/ThemeToggle'
-
 
 export default function LoginPage() {
-    const [loading, setLoading] = useState(false);
+const router = useRouter();
 
-    const handleGoogleSignIn = async () => {
-        setLoading(true);
-        try {
-            await signIn("google", { callbackUrl: "/" });
-        } catch (error) {
-            console.error("Sign in error:", error);
-        } finally {
-            setLoading(false);
-        }
-    };
+  const [loading, setLoading] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
-    return (
-        <>
-            <Header />
-            <MainContent loading={loading} onGoogleSignIn={handleGoogleSignIn} />
-        </>
-    );
-}
+  // Google OAuth Sign-in
+  const handleGoogleSignIn = async () => {
+    setLoading(true);
+    try {
+      await signIn("google", { callbackUrl: "/home" });
+    } catch (err) {
+      setError("Google sign-in failed.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
-function Header() {
-    return (
-        <div className="fixed top-4 right-4 z-50">
-            <ThemeToggle />
+  // Custom Credentials Sign-in
+  const handleCustomLogin = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError("");
+
+    const res = await signIn("credentials", {
+      redirect: false,
+      email,
+      password,
+      callbackUrl: "/home",
+    });
+
+    if (res?.error) {
+      setError(res.error);
+    } else {
+      router.push("/home");
+    }
+
+    setLoading(false);
+  };
+
+  return (
+    <div className="flex min-h-screen items-center justify-center bg-gray-100 px-4">
+      <div className="w-full max-w-md bg-white p-6 rounded shadow-md space-y-6">
+        <h1 className="text-2xl font-bold text-center">Sign In</h1>
+
+        {/* Error Message */}
+        {error && <p className="text-red-500 text-sm text-center">{error}</p>}
+
+        {/* Email/Password Form */}
+        <form onSubmit={handleCustomLogin} className="space-y-4">
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            className="w-full border px-3 py-2 rounded"
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            className="w-full border px-3 py-2 rounded"
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded"
+          >
+            {loading ? "Logging in..." : "Login"}
+          </button>
+        </form>
+
+        {/* OR Divider */}
+        <div className="flex items-center justify-center">
+          <div className="border-t border-gray-300 w-full"></div>
+          <span className="px-2 text-gray-500 text-sm">OR</span>
+          <div className="border-t border-gray-300 w-full"></div>
         </div>
-    );
-}
 
-function MainContent({ loading, onGoogleSignIn }) {
-    return (
-        <div className="flex min-h-screen flex-col items-center justify-center p-4 bg-background transition-colors">
-            <div className="w-full max-w-md">
-                <LoginCard loading={loading} onGoogleSignIn={onGoogleSignIn} />
-                <Footer />
-            </div>
-        </div>
-    );
-}
+        {/* Google Button */}
+        <button
+          onClick={handleGoogleSignIn}
+          disabled={loading}
+          className="w-full border py-2 rounded flex items-center justify-center hover:bg-gray-100"
+        >
+          <GoogleIcon />
+          Sign in with Google
+        </button>
 
-function LoginCard({ loading, onGoogleSignIn }) {
-    return (
-        <Card className="border-2">
-            <CardHeader className="space-y-1">
-                <CardTitle className="text-2xl text-center">Sign in</CardTitle>
-                <CardDescription className="text-center">
-                    Enter your credentials to access your account
-                </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-                <Button
-                    variant="outline"
-                    onClick={onGoogleSignIn}
-                    disabled={loading}
-                    className="w-full"
-                >
-                    <GoogleIcon />
-                    Sign in with Google
-                </Button>
-            </CardContent>
-            <CardFooter className="flex flex-col space-y-4 pt-0">
-                <div className="text-center text-sm">
-                    Don&apos;t have an account?{" "}
-                    <Link href="/register" className="text-primary hover:underline">
-                        Create an account
-                    </Link>
-                </div>
-            </CardFooter>
-        </Card>
-    );
-}
-
-function Footer() {
-    return (
-        <div className="mt-8 text-center text-sm text-muted-foreground">
-            <p>Cloud Manager &copy; {new Date().getFullYear()}</p>
-        </div>
-    );
+        {/* Link to Register */}
+        <p className="text-center text-sm">
+          Don&apos;t have an account?{" "}
+          <Link href="/register" className="text-blue-600 underline">
+            Register here
+          </Link>
+        </p>
+      </div>
+    </div>
+  );
 }
 
 function GoogleIcon() {
-    return (
-        <svg className="h-5 w-5 mr-2" viewBox="0 0 24 24">
-            <path
-                d="M12.545,10.239v3.821h5.445c-0.712,2.315-2.647,3.972-5.445,3.972c-3.332,0-6.033-2.701-6.033-6.032s2.701-6.032,6.033-6.032c1.498,0,2.866,0.549,3.921,1.453l2.814-2.814C17.503,2.988,15.139,2,12.545,2C7.021,2,2.543,6.477,2.543,12s4.478,10,10.002,10c8.396,0,10.249-7.85,9.426-11.748L12.545,10.239z"
-                fill="currentColor"
-            />
-        </svg>
-    );
+  return (
+    <svg className="h-5 w-5 mr-2" viewBox="0 0 24 24">
+      <path
+        d="M12.545,10.239v3.821h5.445c-0.712,2.315-2.647,3.972-5.445,3.972
+          c-3.332,0-6.033-2.701-6.033-6.032s2.701-6.032,6.033-6.032
+          c1.498,0,2.866,0.549,3.921,1.453l2.814-2.814C17.503,2.988,
+          15.139,2,12.545,2C7.021,2,2.543,6.477,2.543,12s4.478,
+          10,10.002,10c8.396,0,10.249-7.85,9.426-11.748L12.545,
+          10.239z"
+        fill="currentColor"
+      />
+    </svg>
+  );
 }

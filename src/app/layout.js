@@ -62,7 +62,7 @@ export default function RootLayout({ children }) {
     <html lang="en" className={htmlClass} style={{ colorScheme: "light" }}>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <Providers>{children}</Providers>
-            <Footer />
+            {/* <Footer /> */}
         <Toaster/>
       </body>
     </html>
