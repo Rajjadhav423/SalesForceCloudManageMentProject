@@ -493,48 +493,48 @@ export default function CloudForceLanding() {
     }
   ];
 
-  const pricingPlans = [
-    {
-      title: 'Free',
-      price: '$0',
-      period: '/month',
-      features: [
-        'Up to 1,000 records',
-        'Basic reporting',
-        'Email support',
-        'Standard templates'
-      ],
-      popular: false
-    },
-    {
-      title: 'Pro',
-      price: '$49',
-      period: '/month',
-      features: [
-        'Up to 10,000 records',
-        'Advanced reporting',
-        'AI Query Assistant',
-        'Priority support',
-        'Custom templates',
-        'API access'
-      ],
-      popular: true
-    },
-    {
-      title: 'Enterprise',
-      price: '$199',
-      period: '/month',
-      features: [
-        'Unlimited records',
-        'Advanced analytics',
-        'Custom integrations',
-        'Dedicated support',
-        'White-label options',
-        'On-premise deployment'
-      ],
-      popular: false
-    }
-  ];
+const pricingPlans = [
+  {
+    title: 'Free',
+    price: '₹0',
+    period: '/month',
+    features: [
+      'Up to 1,000 records',
+      'Basic reporting',
+      'Email support',
+      'Standard templates'
+    ],
+    popular: false
+  },
+  {
+    title: 'Pro',
+    price: '₹4,099',
+    period: '/month',
+    features: [
+      'Up to 10,000 records',
+      'Advanced reporting',
+      'AI Query Assistant',
+      'Priority support',
+      'Custom templates',
+      'API access'
+    ],
+    popular: true
+  },
+  {
+    title: 'Enterprise',
+    price: '₹16,499',
+    period: '/month',
+    features: [
+      'Unlimited records',
+      'Advanced analytics',
+      'Custom integrations',
+      'Dedicated support',
+      'White-label options',
+      'On-premise deployment'
+    ],
+    popular: false
+  }
+];
 
   const faqs = [
     {
