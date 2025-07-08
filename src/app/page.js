@@ -1084,7 +1084,10 @@ export default function CloudForceLanding() {
               <Space direction="vertical">
                 {/* <a href="/privacy-policy" style={{ color: '#fff' }}>Privacy Policy</a> */}
                 <Link href="/privacy-policy">
-                  Privacy Policy
+                  Privacy Policy 
+                </Link>
+                  <Link href="/shipping-policy">
+                  Shipping Policy 
                 </Link>
                 <Link href="/terms-and-conditions">
                  Terms of Service
